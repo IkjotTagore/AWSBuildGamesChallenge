@@ -196,10 +196,10 @@ class Game:
         self.all_sprites.add(platform)
         
         # Generate random platforms
-        last_x = 200
+        self.last_x = 200
         for i in range(15):
             width = random.randint(80, 150)
-            x = last_x + random.randint(100, 200)
+            x = self.last_x + random.randint(100, 200)
             y = random.randint(400, 550)
             platform = Platform(x, y, width)
             self.platforms.add(platform)
@@ -211,10 +211,10 @@ class Game:
                 self.yarn_balls.add(yarn)
                 self.all_sprites.add(yarn)
                 
-            last_x = x + width
+            self.last_x = x + width
         
         # Add treat bowl at the end
-        self.treat_bowl = TreatBowl(last_x + 100, 450)
+        self.treat_bowl = TreatBowl(self.last_x + 100, 450)
         self.all_sprites.add(self.treat_bowl)
     
     def draw_text(self, text, size, x, y, color=WHITE):
@@ -241,7 +241,7 @@ class Game:
             
             if not self.game_over and not self.level_complete:
                 # Update scroll based on player position
-                if self.player.rect.right > SCREEN_WIDTH - SCROLL_THRESH and self.bg_scroll < (last_x + 500):
+                if self.player.rect.right > SCREEN_WIDTH - SCROLL_THRESH and self.bg_scroll < (self.last_x + 500):
                     self.scroll = SCROLL_SPEED
                 else:
                     self.scroll = 0
